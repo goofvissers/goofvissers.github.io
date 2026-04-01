@@ -189,9 +189,10 @@
   }
 
   .grid-dot.diagonal {
-    background: #000000 !important;
+    background: #1a1a18 !important;
     opacity: 1 !important;
-    box-shadow: 0 0 16px rgba(255,255,255,0.7);
+    border-radius: 0;
+    box-shadow: 0 0 16px rgba(26,26,24,0.3);
   }
 
   .hero-label {
@@ -796,7 +797,7 @@
   <div class="section-label reveal">04 — Let's Work Together</div>
   <h2 class="section-title reveal">Have data that needs direction?</h2>
   <div class="reveal">
-    <a href="mailto:hello@example.com" class="btn btn-primary">Send me a message <span class="arrow">→</span></a>
+    <a href="/cdn-cgi/l/email-protection#2048454c4c4f604558414d504c450e434f4d" class="btn btn-primary">Send me a message <span class="arrow">→</span></a>
   </div>
 </section>
 
@@ -805,12 +806,12 @@
   <div class="foot-left">© 2026 — All rights reserved</div>
   <ul class="foot-links">
     <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-    <li><a href="mailto:hello@example.com">Email</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#e58d8089898aa5809d8488958980cb868a88">Email</a></li>
     <li><a href="#">Resume</a></li>
   </ul>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Mobile nav toggle
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
@@ -848,13 +849,4 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
-</script>
-
-</body>
-</html>
+        setTimeout(() => entry.target.classL
