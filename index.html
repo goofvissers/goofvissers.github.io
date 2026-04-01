@@ -665,7 +665,49 @@
     </div>
   </div>
   <div class="hero-visual">
-    <div class="grid-art" id="gridArt"></div>
+    <div class="grid-art" id="gridArt">
+      <div class="grid-dot" style="background:#5a5a56;opacity:0.75"></div>
+      <div class="grid-dot" style="background:#4a4a46;opacity:0.85"></div>
+      <div class="grid-dot" style="background:#6a6a65;opacity:0.65"></div>
+      <div class="grid-dot" style="background:#505050;opacity:0.9"></div>
+      <div class="grid-dot" style="background:#656560;opacity:0.7"></div>
+      <div class="grid-dot diagonal"></div>
+
+      <div class="grid-dot" style="background:#3a3a36;opacity:0.8"></div>
+      <div class="grid-dot" style="background:#7a7a75;opacity:0.6"></div>
+      <div class="grid-dot" style="background:#555555;opacity:0.85"></div>
+      <div class="grid-dot" style="background:#606060;opacity:0.75"></div>
+      <div class="grid-dot diagonal"></div>
+      <div class="grid-dot" style="background:#4a4a46;opacity:0.9"></div>
+
+      <div class="grid-dot" style="background:#656560;opacity:0.7"></div>
+      <div class="grid-dot" style="background:#505050;opacity:0.8"></div>
+      <div class="grid-dot" style="background:#5a5a56;opacity:0.85"></div>
+      <div class="grid-dot diagonal"></div>
+      <div class="grid-dot" style="background:#3a3a36;opacity:0.65"></div>
+      <div class="grid-dot" style="background:#7a7a75;opacity:0.75"></div>
+
+      <div class="grid-dot" style="background:#454545;opacity:0.9"></div>
+      <div class="grid-dot" style="background:#6a6a65;opacity:0.7"></div>
+      <div class="grid-dot diagonal"></div>
+      <div class="grid-dot" style="background:#555555;opacity:0.8"></div>
+      <div class="grid-dot" style="background:#606060;opacity:0.65"></div>
+      <div class="grid-dot" style="background:#4a4a46;opacity:0.85"></div>
+
+      <div class="grid-dot" style="background:#5a5a56;opacity:0.75"></div>
+      <div class="grid-dot diagonal"></div>
+      <div class="grid-dot" style="background:#3a3a36;opacity:0.9"></div>
+      <div class="grid-dot" style="background:#7a7a75;opacity:0.7"></div>
+      <div class="grid-dot" style="background:#505050;opacity:0.8"></div>
+      <div class="grid-dot" style="background:#656560;opacity:0.65"></div>
+
+      <div class="grid-dot diagonal"></div>
+      <div class="grid-dot" style="background:#454545;opacity:0.85"></div>
+      <div class="grid-dot" style="background:#6a6a65;opacity:0.75"></div>
+      <div class="grid-dot" style="background:#555555;opacity:0.9"></div>
+      <div class="grid-dot" style="background:#4a4a46;opacity:0.7"></div>
+      <div class="grid-dot" style="background:#606060;opacity:0.8"></div>
+    </div>
   </div>
 </div>
 
@@ -821,28 +863,6 @@
   links.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => links.classList.remove('open'));
   });
-
-  // Dot grid logo
-  const grid = document.getElementById('gridArt');
-  const greys = [
-    '#5a5a56','#4a4a46','#6a6a65','#3a3a36','#7a7a75',
-    '#505050','#606060','#454545','#555555','#656560'
-  ];
-  for (let i = 0; i < 36; i++) {
-    const row = Math.floor(i / 6);
-    const col = i % 6;
-    const dot = document.createElement('div');
-    dot.classList.add('grid-dot');
-    if (row + col === 5) {
-      dot.classList.add('diagonal');
-    } else {
-      const shade = greys[Math.floor(Math.random() * greys.length)];
-      const opacity = 0.6 + Math.random() * 0.4;
-      dot.style.background = shade;
-      dot.style.opacity = opacity;
-    }
-    grid.appendChild(dot);
-  }
 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
