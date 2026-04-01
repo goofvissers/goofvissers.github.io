@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Data Analyst — Turning Noise Into Signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
-
   :root {
     --bg: #f0f0ee;
     --bg-alt: #e8e8e5;
@@ -162,15 +163,12 @@
 
   .hero-visual {
     flex-shrink: 0;
-    opacity: 0;
-    animation: fadeUp 1s ease forwards 0.3s;
   }
 
   /* ── DOT GRID LOGO ── */
   .grid-art {
-    width: 100%;
-    aspect-ratio: 1;
-    max-width: 320px;
+    width: 320px;
+    height: 320px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
@@ -203,8 +201,6 @@
     text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.2s;
   }
 
   .hero h1 {
@@ -215,8 +211,6 @@
     letter-spacing: -0.02em;
     color: var(--accent);
     max-width: 900px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.4s;
   }
 
   .hero h1 .dot-char {
@@ -244,16 +238,12 @@
     color: var(--text-muted);
     max-width: 520px;
     margin-top: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.6s;
   }
 
   .hero-cta {
     display: flex;
     gap: 1rem;
     margin-top: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.8s;
   }
 
   .btn {
@@ -571,11 +561,6 @@
   footer .foot-links a:hover { color: var(--text); }
 
   /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
   .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -616,7 +601,7 @@
 
     .hero { padding: 7rem 1.5rem 3rem; flex-direction: column; }
     .hero-visual { order: -1; }
-    .grid-art { max-width: 220px; margin: 0 auto; gap: 8px; padding: 1rem; }
+    .grid-art { width: 220px; height: 220px; margin: 0 auto; gap: 8px; padding: 1rem; }
     section { padding: 4rem 1.5rem; }
 
     .skills-grid { grid-template-columns: 1fr; }
@@ -811,7 +796,7 @@
   <div class="section-label reveal">04 — Let's Work Together</div>
   <h2 class="section-title reveal">Have data that needs direction?</h2>
   <div class="reveal">
-    <a href="/cdn-cgi/l/email-protection#335b565f5f5c73564b525e435f561d505c5e" class="btn btn-primary">Send me a message <span class="arrow">→</span></a>
+    <a href="mailto:hello@example.com" class="btn btn-primary">Send me a message <span class="arrow">→</span></a>
   </div>
 </section>
 
@@ -820,12 +805,12 @@
   <div class="foot-left">© 2026 — All rights reserved</div>
   <ul class="foot-links">
     <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-    <li><a href="/cdn-cgi/l/email-protection#84ece1e8e8ebc4e1fce5e9f4e8e1aae7ebe9">Email</a></li>
+    <li><a href="mailto:hello@example.com">Email</a></li>
     <li><a href="#">Resume</a></li>
   </ul>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Mobile nav toggle
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
@@ -863,4 +848,13 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.class
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
