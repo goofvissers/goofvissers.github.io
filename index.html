@@ -69,21 +69,27 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
   }
 
-  .nav-logo span {
-    display: inline-block;
-    width: 6px; height: 6px;
-    background: var(--dot-active);
+  .nav-mark {
+    display: grid;
+    grid-template-columns: repeat(3, 6px);
+    gap: 3px;
+  }
+
+  .nav-mark i {
+    display: block;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    margin-left: 4px;
-    vertical-align: middle;
-    animation: blink 2.5s ease-in-out infinite;
+    background: var(--text-light);
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
+  .nav-mark i.on {
+    background: var(--accent);
   }
 
   .nav-links {
@@ -141,11 +147,53 @@
     z-index: 1;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
     padding: 8rem 3rem 4rem;
     max-width: 1280px;
     margin: 0 auto;
+  }
+
+  .hero-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .hero-visual {
+    flex-shrink: 0;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+  }
+
+  /* ── DOT GRID LOGO ── */
+  .grid-art {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 320px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 12px;
+    padding: 2rem;
+  }
+
+  .grid-dot {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    transition: all 0.5s ease;
+  }
+
+  .grid-dot:hover {
+    transform: scale(1.25);
+    filter: brightness(1.4);
+  }
+
+  .grid-dot.diagonal {
+    background: var(--white) !important;
+    opacity: 1 !important;
+    box-shadow: 0 0 12px rgba(250,250,248,0.5);
   }
 
   .hero-label {
@@ -566,7 +614,9 @@
 
     .nav-toggle { display: flex; z-index: 101; }
 
-    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero { padding: 7rem 1.5rem 3rem; flex-direction: column; }
+    .hero-visual { order: -1; }
+    .grid-art { max-width: 220px; margin: 0 auto; gap: 8px; padding: 1rem; }
     section { padding: 4rem 1.5rem; }
 
     .skills-grid { grid-template-columns: 1fr; }
@@ -598,7 +648,14 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">datapoint<span></span></div>
+  <div class="nav-logo">
+    <div class="nav-mark">
+      <i></i><i></i><i class="on"></i>
+      <i></i><i class="on"></i><i></i>
+      <i class="on"></i><i></i><i></i>
+    </div>
+    datapoint
+  </div>
   <ul class="nav-links" id="navLinks">
     <li><a href="#skills">Skills</a></li>
     <li><a href="#tools">Tools</a></li>
@@ -612,12 +669,17 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-label">Data Analyst  ·  Excel  ·  Power BI</div>
-  <h1>I turn raw data into clear decisions<span class="dot-char">.</span></h1>
-  <p class="hero-sub">Structured analysis, clean dashboards, and actionable insights — built with precision and delivered with clarity.</p>
-  <div class="hero-cta">
-    <a href="#contact" class="btn btn-primary">Get in touch <span class="arrow">→</span></a>
-    <a href="#skills" class="btn">See my work <span class="arrow">→</span></a>
+  <div class="hero-content">
+    <div class="hero-label">Data Analyst  ·  Excel  ·  Power BI</div>
+    <h1>I turn raw data into clear decisions<span class="dot-char">.</span></h1>
+    <p class="hero-sub">Structured analysis, clean dashboards, and actionable insights — built with precision and delivered with clarity.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get in touch <span class="arrow">→</span></a>
+      <a href="#skills" class="btn">See my work <span class="arrow">→</span></a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="grid-art" id="gridArt"></div>
   </div>
 </div>
 
@@ -774,18 +836,31 @@
     a.addEventListener('click', () => links.classList.remove('open'));
   });
 
+  // Dot grid logo
+  const grid = document.getElementById('gridArt');
+  const greys = [
+    '#a8a8a3','#b5b5b0','#9a9a95','#c2c2bc','#8e8e89',
+    '#d0d0ca','#a0a09b','#b8b8b3','#959590','#ababa6'
+  ];
+  for (let i = 0; i < 36; i++) {
+    const row = Math.floor(i / 6);
+    const col = i % 6;
+    const dot = document.createElement('div');
+    dot.classList.add('grid-dot');
+    if (row + col === 5) {
+      dot.classList.add('diagonal');
+    } else {
+      const shade = greys[Math.floor(Math.random() * greys.length)];
+      const opacity = 0.35 + Math.random() * 0.55;
+      dot.style.background = shade;
+      dot.style.opacity = opacity;
+    }
+    grid.appendChild(dot);
+  }
+
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
-</script>
-
-</body>
-</html>
+        setTimeout(() => entry.target.classL
