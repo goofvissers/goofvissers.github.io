@@ -191,9 +191,9 @@
   }
 
   .grid-dot.diagonal {
-    background: var(--white) !important;
+    background: #ffffff !important;
     opacity: 1 !important;
-    box-shadow: 0 0 12px rgba(250,250,248,0.5);
+    box-shadow: 0 0 16px rgba(255,255,255,0.7);
   }
 
   .hero-label {
@@ -811,7 +811,7 @@
   <div class="section-label reveal">04 — Let's Work Together</div>
   <h2 class="section-title reveal">Have data that needs direction?</h2>
   <div class="reveal">
-    <a href="mailto:hello@example.com" class="btn btn-primary">Send me a message <span class="arrow">→</span></a>
+    <a href="/cdn-cgi/l/email-protection#335b565f5f5c73564b525e435f561d505c5e" class="btn btn-primary">Send me a message <span class="arrow">→</span></a>
   </div>
 </section>
 
@@ -820,12 +820,12 @@
   <div class="foot-left">© 2026 — All rights reserved</div>
   <ul class="foot-links">
     <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-    <li><a href="mailto:hello@example.com">Email</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#84ece1e8e8ebc4e1fce5e9f4e8e1aae7ebe9">Email</a></li>
     <li><a href="#">Resume</a></li>
   </ul>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Mobile nav toggle
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
@@ -839,8 +839,8 @@
   // Dot grid logo
   const grid = document.getElementById('gridArt');
   const greys = [
-    '#a8a8a3','#b5b5b0','#9a9a95','#c2c2bc','#8e8e89',
-    '#d0d0ca','#a0a09b','#b8b8b3','#959590','#ababa6'
+    '#5a5a56','#4a4a46','#6a6a65','#3a3a36','#7a7a75',
+    '#505050','#606060','#454545','#555555','#656560'
   ];
   for (let i = 0; i < 36; i++) {
     const row = Math.floor(i / 6);
@@ -851,7 +851,7 @@
       dot.classList.add('diagonal');
     } else {
       const shade = greys[Math.floor(Math.random() * greys.length)];
-      const opacity = 0.35 + Math.random() * 0.55;
+      const opacity = 0.6 + Math.random() * 0.4;
       dot.style.background = shade;
       dot.style.opacity = opacity;
     }
@@ -863,13 +863,4 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
-</script>
-
-</body>
-</html>
+        setTimeout(() => entry.target.class
