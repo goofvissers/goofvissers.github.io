@@ -36,7 +36,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ── DOT GRID BACKGROUND ── */
+  /* DOT GRID BACKGROUND */
   .dot-grid {
     position: fixed;
     inset: 0;
@@ -47,7 +47,7 @@
     opacity: 0.5;
   }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
     position: fixed;
     top: 0;
@@ -91,6 +91,7 @@
 
   .nav-mark i.on {
     background: var(--accent);
+    border-radius: 10%;
   }
 
   .nav-links {
@@ -142,7 +143,7 @@
     transition: all 0.3s;
   }
 
-  /* ── HERO ── */
+  /* HERO */
   .hero {
     position: relative;
     z-index: 1;
@@ -165,7 +166,7 @@
     flex-shrink: 0;
   }
 
-  /* ── DOT GRID LOGO ── */
+  /* DOT GRID LOGO */
   .grid-art {
     width: 320px;
     height: 320px;
@@ -192,7 +193,7 @@
     background: #1a1a18 !important;
     opacity: 1 !important;
     border-radius: 10%;
-
+    box-shadow: 0 0 16px rgba(26,26,24,0.3);
   }
 
   .hero-label {
@@ -288,7 +289,7 @@
     transform: translateX(4px);
   }
 
-  /* ── DOT MATRIX BANNER ── */
+  /* DOT MATRIX BANNER */
   .dot-banner {
     position: relative;
     z-index: 1;
@@ -313,7 +314,7 @@
     100% { transform: translateX(-100%); }
   }
 
-  /* ── SECTION STYLES ── */
+  /* SECTION STYLES */
   section {
     position: relative;
     z-index: 1;
@@ -340,7 +341,7 @@
     line-height: 1.2;
   }
 
-  /* ── SKILLS GRID ── */
+  /* SKILLS GRID */
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -407,7 +408,7 @@
     margin-right: 0.3rem;
   }
 
-  /* ── TOOLS SECTION ── */
+  /* TOOLS SECTION */
   .tools-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -470,7 +471,7 @@
 
   .tool-dots i.on { background: var(--dot-active); }
 
-  /* ── PROCESS SECTION ── */
+  /* PROCESS SECTION */
   .process-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -511,7 +512,7 @@
     color: var(--text-muted);
   }
 
-  /* ── CTA ── */
+  /* CTA */
   .cta-section {
     text-align: center;
     padding: 8rem 3rem;
@@ -522,7 +523,7 @@
     margin: 0 auto 2rem;
   }
 
-  /* ── FOOTER ── */
+  /* FOOTER */
   footer {
     position: relative;
     z-index: 1;
@@ -561,7 +562,7 @@
 
   footer .foot-links a:hover { color: var(--text); }
 
-  /* ── ANIMATIONS ── */
+  /* ANIMATIONS */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -573,7 +574,7 @@
     transform: translateY(0);
   }
 
-  /* ── RESPONSIVE ── */
+  /* RESPONSIVE */
   @media (max-width: 1024px) {
     .skills-grid { grid-template-columns: repeat(2, 1fr); }
     .process-list { grid-template-columns: repeat(2, 1fr); }
@@ -660,47 +661,48 @@
     <h1>I turn raw data into clear decisions<span class="dot-char">.</span></h1>
     <p class="hero-sub">Structured analysis, clean dashboards, and actionable insights — built with precision and delivered with clarity.</p>
     <div class="hero-cta">
-      <a href="#contact" class="btn btn-primary">Get in touch <span class="arrow">→</span></a>
-      <a href="#skills" class="btn">See my work <span class="arrow">→</span></a>
+      <a href="#contact" class="btn btn-primary">Get in touch <span class="arrow">&rarr;</span></a>
+      <a href="#skills" class="btn">See my work <span class="arrow">&rarr;</span></a>
     </div>
   </div>
   <div class="hero-visual">
     <div class="grid-art" id="gridArt">
+      <!-- Row 0: diagonal at col 5 -->
       <div class="grid-dot" style="background:#5a5a56;opacity:0.75"></div>
       <div class="grid-dot" style="background:#4a4a46;opacity:0.85"></div>
       <div class="grid-dot" style="background:#6a6a65;opacity:0.65"></div>
       <div class="grid-dot" style="background:#505050;opacity:0.9"></div>
       <div class="grid-dot" style="background:#656560;opacity:0.7"></div>
       <div class="grid-dot diagonal"></div>
-
+      <!-- Row 1: diagonal at col 4 -->
       <div class="grid-dot" style="background:#3a3a36;opacity:0.8"></div>
       <div class="grid-dot" style="background:#7a7a75;opacity:0.6"></div>
       <div class="grid-dot" style="background:#555555;opacity:0.85"></div>
       <div class="grid-dot" style="background:#606060;opacity:0.75"></div>
       <div class="grid-dot diagonal"></div>
       <div class="grid-dot" style="background:#4a4a46;opacity:0.9"></div>
-
+      <!-- Row 2: diagonal at col 3 -->
       <div class="grid-dot" style="background:#656560;opacity:0.7"></div>
       <div class="grid-dot" style="background:#505050;opacity:0.8"></div>
       <div class="grid-dot" style="background:#5a5a56;opacity:0.85"></div>
       <div class="grid-dot diagonal"></div>
       <div class="grid-dot" style="background:#3a3a36;opacity:0.65"></div>
       <div class="grid-dot" style="background:#7a7a75;opacity:0.75"></div>
-
+      <!-- Row 3: diagonal at col 2 -->
       <div class="grid-dot" style="background:#454545;opacity:0.9"></div>
       <div class="grid-dot" style="background:#6a6a65;opacity:0.7"></div>
       <div class="grid-dot diagonal"></div>
       <div class="grid-dot" style="background:#555555;opacity:0.8"></div>
       <div class="grid-dot" style="background:#606060;opacity:0.65"></div>
       <div class="grid-dot" style="background:#4a4a46;opacity:0.85"></div>
-
+      <!-- Row 4: diagonal at col 1 -->
       <div class="grid-dot" style="background:#5a5a56;opacity:0.75"></div>
       <div class="grid-dot diagonal"></div>
       <div class="grid-dot" style="background:#3a3a36;opacity:0.9"></div>
       <div class="grid-dot" style="background:#7a7a75;opacity:0.7"></div>
       <div class="grid-dot" style="background:#505050;opacity:0.8"></div>
       <div class="grid-dot" style="background:#656560;opacity:0.65"></div>
-
+      <!-- Row 5: diagonal at col 0 -->
       <div class="grid-dot diagonal"></div>
       <div class="grid-dot" style="background:#454545;opacity:0.85"></div>
       <div class="grid-dot" style="background:#6a6a65;opacity:0.75"></div>
@@ -820,15 +822,15 @@
       <p>Define the business question and identify what data is needed to answer it.</p>
     </div>
     <div class="process-item">
-      <h4>Collect & Clean</h4>
+      <h4>Collect &amp; Clean</h4>
       <p>Gather data from multiple sources, resolve inconsistencies, and structure it for analysis.</p>
     </div>
     <div class="process-item">
-      <h4>Analyze & Model</h4>
+      <h4>Analyze &amp; Model</h4>
       <p>Apply statistical methods and build models to uncover patterns and test hypotheses.</p>
     </div>
     <div class="process-item">
-      <h4>Deliver & Iterate</h4>
+      <h4>Deliver &amp; Iterate</h4>
       <p>Present findings through dashboards and reports, then refine based on feedback.</p>
     </div>
   </div>
@@ -839,34 +841,46 @@
   <div class="section-label reveal">04 — Let's Work Together</div>
   <h2 class="section-title reveal">Have data that needs direction?</h2>
   <div class="reveal">
-    <a href="/cdn-cgi/l/email-protection#2048454c4c4f604558414d504c450e434f4d" class="btn btn-primary">Send me a message <span class="arrow">→</span></a>
+    <a href="#" class="btn btn-primary" onclick="window.location='mai'+'lto:'+'hello'+'@'+'example.com'; return false;">Send me a message <span class="arrow">&rarr;</span></a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="foot-left">© 2026 — All rights reserved</div>
+  <div class="foot-left">&copy; 2026 — All rights reserved</div>
   <ul class="foot-links">
     <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
-    <li><a href="/cdn-cgi/l/email-protection#e58d8089898aa5809d8488958980cb868a88">Email</a></li>
+    <li><a href="#" onclick="window.location='mai'+'lto:'+'hello'+'@'+'example.com'; return false;">Email</a></li>
     <li><a href="#">Resume</a></li>
   </ul>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Mobile nav toggle
-  const toggle = document.getElementById('navToggle');
-  const links = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => {
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function() {
     links.classList.toggle('open');
   });
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => links.classList.remove('open'));
-  });
+  var navAs = links.querySelectorAll('a');
+  for (var i = 0; i < navAs.length; i++) {
+    navAs[i].addEventListener('click', function() { links.classList.remove('open'); });
+  }
 
   // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry, i) {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classL
+        setTimeout(function() { entry.target.classList.add('visible'); }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  for (var j = 0; j < reveals.length; j++) {
+    observer.observe(reveals[j]);
+  }
+</script>
+
+</body>
+</html>
