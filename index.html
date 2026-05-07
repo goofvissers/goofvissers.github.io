@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/apple-touch-icon.png" />
+    <title>Lvl Up Your Health</title>
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+<style id="ios-fixes">
+  html, body {
+    width: 100vw;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+  #root {
+    width: 100vw;
+    height: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    /* viewport-fit=cover lets the page extend under the notch/home
+       indicator, but env(safe-area-inset-top) returns 0 in non-PWA
+       Safari tabs even on notched iPhones — so the app header was
+       rendering behind the iOS status bar. Clamp to a 50px floor
+       (Dynamic Island height); env() still wins where it's larger.
+       RN-Web's SafeAreaView is a plain View on web, so this CSS is
+       what enforces the inset. */
+    padding-top: max(env(safe-area-inset-top), 50px);
+    padding-bottom: env(safe-area-inset-bottom);
+    box-sizing: border-box;
+  }
+</style>
+  </head>
+
+  <body>
+<style id="gate-style">
+  #gate { position: fixed; inset: 0; background: #ffffff; z-index: 99999; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+  #gate-form { display: flex; flex-direction: column; gap: 14px; align-items: center; }
+  #gate-title { font-size: 12px; color: #888; letter-spacing: 0.12em; text-transform: uppercase; }
+  #gate-input { width: 240px; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; outline: none; text-align: center; font-family: inherit; }
+  #gate-input:focus { border-color: #1d9e75; }
+  #gate-error { font-size: 12px; color: #c44; height: 14px; }
+  #gate-submit-offscreen { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  #root { visibility: hidden; }
+</style>
+<div id="gate" role="dialog" aria-label="Password required">
+  <form id="gate-form" action="#">
+    <div id="gate-title">healthtracker</div>
+    <input id="gate-input" type="password" autocomplete="current-password" autofocus aria-label="Password" enterkeyhint="go" inputmode="text" />
+    <div id="gate-error"></div>
+    <button id="gate-submit-offscreen" type="submit" aria-hidden="true" tabindex="-1">go</button>
+  </form>
+</div>
+<script id="gate-script">
+(function () {
+  var EXPECTED = "e51c1bd456c4903c01bda3bb667ac7aef4a904ff9aa290f4011baad6fb44af42";
+  var KEY = "ht-gate-v1";
+
+  function unlock() {
+    var g = document.getElementById("gate");
+    var s = document.getElementById("gate-style");
+    if (g && g.parentNode) g.parentNode.removeChild(g);
+    if (s && s.parentNode) s.parentNode.removeChild(s);
+    var r = document.getElementById("root");
+    if (r) r.style.visibility = "visible";
+    // Re-measure viewport: iOS Safari can shift the layout/visual viewport
+    // slightly when the fixed-position gate overlay is removed and the
+    // soft keyboard dismisses, leaving App.tsx's cached width stale.
+    try { window.dispatchEvent(new Event("resize")); } catch (e) {}
+  }
+
+  try {
+    if (sessionStorage.getItem(KEY) === "1") { unlock(); return; }
+  } catch (e) {}
+
+  // SHA-256 fallback for non-secure contexts (http://) where crypto.subtle is unavailable.
+  function sha256Hex(text) {
+    function rotr(n, x) { return (x >>> n) | (x << (32 - n)); }
+    var K = [0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+    var H = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+    var utf8 = unescape(encodeURIComponent(text));
+    var bytes = [];
+    for (var i = 0; i < utf8.length; i++) bytes.push(utf8.charCodeAt(i));
+    var bitLen = bytes.length * 8;
+    bytes.push(0x80);
+    while (bytes.length % 64 !== 56) bytes.push(0);
+    for (var i = 0; i < 4; i++) bytes.push(0);
+    bytes.push((bitLen >>> 24) & 0xff, (bitLen >>> 16) & 0xff, (bitLen >>> 8) & 0xff, bitLen & 0xff);
+    for (var off = 0; off < bytes.length; off += 64) {
+      var W = new Array(64);
+      for (var t = 0; t < 16; t++) {
+        W[t] = (bytes[off+t*4]<<24) | (bytes[off+t*4+1]<<16) | (bytes[off+t*4+2]<<8) | bytes[off+t*4+3];
+      }
+      for (var t = 16; t < 64; t++) {
+        var s0 = rotr(7,W[t-15]) ^ rotr(18,W[t-15]) ^ (W[t-15]>>>3);
+        var s1 = rotr(17,W[t-2]) ^ rotr(19,W[t-2]) ^ (W[t-2]>>>10);
+        W[t] = (W[t-16] + s0 + W[t-7] + s1) | 0;
+      }
+      var a=H[0],b=H[1],c=H[2],d=H[3],e=H[4],f=H[5],g=H[6],h=H[7];
+      for (var t = 0; t < 64; t++) {
+        var S1 = rotr(6,e) ^ rotr(11,e) ^ rotr(25,e);
+        var ch = (e & f) ^ (~e & g);
+        var T1 = (h + S1 + ch + K[t] + W[t]) | 0;
+        var S0 = rotr(2,a) ^ rotr(13,a) ^ rotr(22,a);
+        var maj = (a & b) ^ (a & c) ^ (b & c);
+        var T2 = (S0 + maj) | 0;
+        h=g; g=f; f=e; e=(d+T1)|0; d=c; c=b; b=a; a=(T1+T2)|0;
+      }
+      H[0]=(H[0]+a)|0; H[1]=(H[1]+b)|0; H[2]=(H[2]+c)|0; H[3]=(H[3]+d)|0;
+      H[4]=(H[4]+e)|0; H[5]=(H[5]+f)|0; H[6]=(H[6]+g)|0; H[7]=(H[7]+h)|0;
+    }
+    return H.map(function (v) { return ((v >>> 0).toString(16).padStart(8,"0")); }).join("");
+  }
+
+  function hash(text) {
+    var subtle = (typeof crypto !== "undefined" && crypto && crypto.subtle) ? crypto.subtle : null;
+    if (subtle && typeof TextEncoder !== "undefined") {
+      try {
+        var bytes = new TextEncoder().encode(text);
+        return subtle.digest("SHA-256", bytes).then(function (buf) {
+          var arr = Array.from(new Uint8Array(buf));
+          return arr.map(function (b) { return b.toString(16).padStart(2,"0"); }).join("");
+        });
+      } catch (e) { /* fall through */ }
+    }
+    return Promise.resolve(sha256Hex(text));
+  }
+
+  function bind() {
+    var form = document.getElementById("gate-form");
+    var input = document.getElementById("gate-input");
+    var err = document.getElementById("gate-error");
+    if (!form || !input) return;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var value = input.value;
+      hash(value).then(function (hex) {
+        if (hex === EXPECTED) {
+          try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+          unlock();
+        } else {
+          err.textContent = "wrong password";
+          input.value = "";
+          input.focus();
+        }
+      }).catch(function () {
+        err.textContent = "hash error";
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bind);
+  } else {
+    bind();
+  }
+})();
+</script>
+
+    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <!-- The root element for your Expo app. -->
+    <div id="root"></div>
+  <script src="/_expo/static/js/web/AppEntry-5a3368466a097ab903980e2558008900.js" defer></script>
+</body>
+</html>
